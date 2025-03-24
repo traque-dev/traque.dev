@@ -1,33 +1,21 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Manrope } from 'next/font/google';
+import { Providers } from '@/app/providers';
+import type { PropsWithChildren } from 'react';
+import './globals.css';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const manrope = Manrope();
 
 export const metadata: Metadata = {
-  title: "Traque",
-  description: "Traque",
+  title: 'Traque',
+  description: 'Error Tracking Service for Your Startup',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${manrope.className} antialiased`}>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
