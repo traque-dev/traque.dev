@@ -5,6 +5,8 @@ import { WaitListForm } from '@/common/components/WaitListForm';
 import Image from 'next/image';
 import { getWaitlistCount } from '@/common/api/waitlist';
 
+export const revalidate = 60;
+
 export default async function Home() {
   const { count } = await getWaitlistCount();
 
