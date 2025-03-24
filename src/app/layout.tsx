@@ -4,7 +4,9 @@ import { Providers } from '@/app/providers';
 import type { PropsWithChildren } from 'react';
 import './globals.css';
 
-const manrope = Manrope();
+const manrope = Manrope({
+  subsets: ['latin'],
+});
 
 export const metadata: Metadata = {
   title: 'Traque',
