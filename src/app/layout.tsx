@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Manrope } from 'next/font/google';
 import { Providers } from '@/app/providers';
 import type { PropsWithChildren } from 'react';
@@ -11,6 +11,13 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: 'Traque',
   description: 'Error Tracking Service for Your Startup',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
