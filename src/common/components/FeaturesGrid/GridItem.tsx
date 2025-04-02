@@ -25,10 +25,10 @@ export const GridItem = ({ area, icon, title, description }: GridItemProps) => {
               {icon}
             </div>
             <div className="space-y-3">
-              <h3 className="-tracking-4 pt-0.5 font-sans text-xl/[1.375rem] font-semibold text-balance text-black md:text-xl/[1.875rem] dark:text-white">
+              <h3 className="-tracking-4 pt-0.5 font-sans text-xl/[1.375rem] font-semibold text-balance text-white md:text-xl/[1.875rem] dark:text-white">
                 {title}
               </h3>
-              <h2 className="font-sans text-sm/[1.125rem] text-black md:text-sm/[1.375rem] dark:text-neutral-400 [&_b]:md:font-semibold [&_strong]:md:font-semibold">
+              <h2 className="font-sans text-sm/[1.125rem] text-neutral-400 md:text-sm/[1.375rem] dark:text-neutral-400 [&_b]:md:font-semibold [&_strong]:md:font-semibold">
                 {description}
               </h2>
             </div>
