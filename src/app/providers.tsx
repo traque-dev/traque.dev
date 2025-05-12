@@ -9,7 +9,15 @@ const queryClient = new QueryClient();
 export function Providers({ children }: PropsWithChildren) {
   return (
     <QueryClientProvider client={queryClient}>
-      <FumadocsRootProvider>{children}</FumadocsRootProvider>
+      <FumadocsRootProvider
+        theme={{
+          // enabled: false,
+          defaultTheme: 'dark',
+          enableSystem: false,
+        }}
+      >
+        {children}
+      </FumadocsRootProvider>
     </QueryClientProvider>
   );
 }

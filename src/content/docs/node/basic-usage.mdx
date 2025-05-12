@@ -1,0 +1,189 @@
+---
+title: Basic Usage
+description: Learn how to use the Traque Node.js SDK for error tracking and monitoring in your application.
+---
+
+# Basic Usage
+
+After installing and configuring the Traque Node.js SDK, you can start using it to monitor and track errors in your Node.js application.
+
+## Initialization
+
+First, import and initialize the SDK in your application:
+
+```typescript
+import { Traque } from '@traque/node';
+
+const traque = new Traque({
+  serviceUrl: 'YOUR_TRAQUE_SERVICE_URL',
+  apiKey: 'YOUR_API_KEY',
+  environment: 'PRODUCTION',
+});
+```
+
+## Automatic Error Capturing
+
+The SDK can automatically capture unhandled exceptions and promise rejections in your application.
+
+### Enable Auto-Capture
+
+```typescript
+// Enable automatic error capturing
+traque.enableAutoCapture();
+```
+
+### Disable Auto-Capture
+
+```typescript
+// Disable automatic error capturing when needed
+traque.disableAutoCapture();
+```
+
+## Manual Error Capturing
+
+You can manually capture errors with additional context when needed:
+
+```typescript
+try {
+  // Your code that might throw an error
+  throw new Error('Something went wrong');
+} catch (error) {
+  traque.captureException(error);
+}
+```
+
+## Framework Integration
+
+### Express.js
+
+For Express.js applications, add the error handler middleware:
+
+```typescript
+import express, { Request, Response, NextFunction } from 'express';
+
+const app = express();
+
+// Your routes and other middleware...
+
+// Add the error handler middleware last
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  traque.captureException(err, req, res);
+  next(err);
+});
+```
+
+### Fastify
+
+For Fastify applications, set up the error handler:
+
+```typescript
+import fastify from 'fastify';
+
+const app = fastify();
+
+app.setErrorHandler((error, request, reply) => {
+  traque.captureException(error, request.raw, reply.raw);
+  throw error;
+});
+```
+
+### Hono
+
+For Hono applications, configure the error handler:
+
+```typescript
+import { Hono } from 'hono';
+
+const app = new Hono();
+
+app.onError((err, c) => {
+  traque.captureException(err, c.req.raw, c.res.raw);
+  return c.text('Internal Server Error', 500);
+});
+```
+
+## HTTP Context
+
+When using framework integration, the SDK automatically captures the following HTTP context:
+
+- Request URL
+- HTTP method
+- Status code
+- Status message
+- Client IP address
+
+## Best Practices
+
+### Single Instance
+
+Create a single Traque instance and reuse it throughout your application:
+
+```typescript
+// config/traque.ts
+import { Traque } from '@traque/node';
+
+export const traque = new Traque({
+  serviceUrl: process.env.TRAQUE_SERVICE_URL,
+  apiKey: process.env.TRAQUE_API_KEY,
+  environment: process.env.NODE_ENV,
+});
+
+// In other files
+import { traque } from './config/traque';
+```
+
+### Environment-Based Configuration
+
+Configure the SDK differently based on your environment:
+
+```typescript
+const traque = new Traque({
+  serviceUrl: process.env.TRAQUE_SERVICE_URL,
+  apiKey: process.env.TRAQUE_API_KEY,
+  environment:
+    process.env.NODE_ENV === 'production' ? 'PRODUCTION' : 'DEVELOPMENT',
+});
+
+// Enable auto-capture only in production
+if (process.env.NODE_ENV === 'production') {
+  traque.enableAutoCapture();
+}
+```
+
+### Error Context
+
+Add relevant context when manually capturing errors:
+
+```typescript
+try {
+  await processOrder(orderId);
+} catch (error) {
+  traque.captureException(error, {
+    context: {
+      orderId,
+      userId: user.id,
+      orderType: 'subscription',
+    },
+  });
+}
+```
+
+## Common Issues
+
+### Network Errors
+
+The SDK handles network errors gracefully. If the service is temporarily unavailable, the SDK will:
+
+- Log the error locally
+- Queue the error report for retry
+- Continue normal application operation
+
+### Configuration Validation
+
+The SDK validates your configuration during initialization. Common issues include:
+
+- Missing or invalid API key
+- Invalid service URL
+- Invalid environment value
+
+Make sure to check your environment variables and configuration values if you encounter initialization errors.

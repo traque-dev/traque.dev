@@ -1,0 +1,128 @@
+---
+title: Basic Usage
+description: Learn how to use Traque SDK with NestJS for exception tracking
+---
+
+## Automatic Exception Tracking
+
+Once you've set up Traque with the `setupNestExceptionFilter` method in your application bootstrap, all unhandled exceptions will be automatically captured and reported to Traque:
+
+```typescript
+import { Traque } from '@traque/nest';
+import { NestFactory } from '@nestjs/core';
+import { Logger } from '@nestjs/common';
+import { AppModule } from './App.module';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+
+  const traque = new Traque({
+    serviceUrl: process.env.TRAQUE_SERVICE_URL,
+    apiKey: process.env.TRAQUE_PUBLIC_API_KEY,
+    logger: new Logger('Traque'),
+  });
+
+  // Setup automatic exception tracking
+  traque.setupNestExceptionFilter(app);
+
+  await app.listen(3000);
+}
+```
+
+## Manual Exception Tracking
+
+You can also manually capture exceptions using the `captureException` method from your Traque instance:
+
+```typescript
+import { Injectable } from '@nestjs/common';
+import { Traque } from '@traque/nest';
+
+@Injectable()
+export class YourService {
+  constructor(private readonly traque: Traque) {}
+
+  async someMethod() {
+    try {
+      // Your business logic here
+    } catch (error) {
+      // Manually capture the exception
+      this.traque.captureException({
+        name: 'CustomError',
+        message: 'Something went wrong in someMethod',
+        // Optional: Add additional context
+        context: {
+          methodName: 'someMethod',
+          timestamp: new Date().toISOString(),
+        },
+      });
+    }
+  }
+}
+```
+
+## Singleton Instance
+
+Traque is designed to maintain a single instance throughout your application. The same instance that you initialize in your `main.ts` file can be used across your application through dependency injection.
+
+To use the Traque instance in your services or controllers:
+
+```typescript
+import { Module } from '@nestjs/common';
+import { Traque } from '@traque/nest';
+
+@Module({
+  providers: [
+    {
+      provide: Traque,
+      useValue: traque, // Use the same instance created in main.ts
+    },
+  ],
+})
+export class AppModule {}
+```
+
+Then inject it into your services:
+
+```typescript
+@Injectable()
+export class MyService {
+  constructor(private readonly traque: Traque) {}
+
+  async someOperation() {
+    try {
+      // Your code
+    } catch (error) {
+      this.traque.captureException({
+        name: error.name,
+        message: error.message,
+      });
+    }
+  }
+}
+```
+
+## Best Practices
+
+1. **Single Instance**: Always use the same Traque instance throughout your application to ensure consistent error tracking and proper resource management.
+
+2. **Automatic Tracking**: Let the automatic exception filter handle unexpected errors in your application.
+
+3. **Manual Tracking**: Use manual tracking when you want to:
+
+   - Add custom context to exceptions
+   - Track handled exceptions
+   - Create custom error reports
+
+4. **Context**: When manually tracking exceptions, provide meaningful context to help with debugging:
+
+```typescript
+traque.captureException({
+  name: 'DatabaseError',
+  message: 'Failed to connect to database',
+  context: {
+    operation: 'user_creation',
+    userId: '123',
+    timestamp: new Date().toISOString(),
+  },
+});
+```

@@ -1,5 +1,12 @@
 {
-  "title:": "guide",
-  "root": true,
-  "pages": []
-}
+    "title": "guide",
+    "root": true,
+    "pages": [
+      "introduction",
+      "getting-started",
+      "node",
+      "nest",
+      "react"
+    ]
+  }
+  

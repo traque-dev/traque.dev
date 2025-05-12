@@ -8,6 +8,8 @@ import {
 import { notFound } from 'next/navigation';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 // import { metadataImage } from '@/lib/metadata';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { PlatformSelect } from '@/common/components/platform-select';
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -23,7 +25,9 @@ export default async function Page(props: {
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
-        <MDX components={{ ...defaultMdxComponents }} />
+        <MDX
+          components={{ ...defaultMdxComponents, Tab, Tabs, PlatformSelect }}
+        />
       </DocsBody>
     </DocsPage>
   );

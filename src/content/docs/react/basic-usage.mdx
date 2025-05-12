@@ -1,0 +1,163 @@
+---
+title: Basic Usage
+description: Learn how to use the core features of the Traque React SDK
+---
+
+# Basic Usage
+
+The Traque React SDK provides several core features for error tracking and monitoring in your React applications. This guide covers the main components and hooks you'll use most frequently.
+
+## Error Boundaries
+
+Error Boundaries are React components that catch JavaScript errors anywhere in their child component tree. The Traque SDK provides an `ErrorBoundary` component that automatically reports these errors to your Traque service.
+
+### Basic Error Boundary Usage
+
+```tsx
+import { ErrorBoundary } from '@traque/react';
+
+function MyComponent() {
+  return (
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      <YourComponent />
+    </ErrorBoundary>
+  );
+}
+```
+
+### Advanced Error Boundary Configuration
+
+You can customize the error handling and display:
+
+```tsx
+import { ErrorBoundary } from '@traque/react';
+
+function MyComponent() {
+  return (
+    <ErrorBoundary
+      fallback={(error) => (
+        <div className="error-container">
+          <h2>Oops! Something went wrong</h2>
+          <p>{error.message}</p>
+          <button onClick={() => window.location.reload()}>Refresh Page</button>
+        </div>
+      )}
+      onError={(error, errorInfo) => {
+        // Additional error handling
+        console.log('Error details:', error);
+        console.log('Component stack:', errorInfo.componentStack);
+      }}
+    >
+      <YourComponent />
+    </ErrorBoundary>
+  );
+}
+```
+
+## Manual Error Reporting
+
+The `useTraque` hook provides access to error reporting functions for manual error capture.
+
+### Using the useTraque Hook
+
+```tsx
+import { useTraque } from '@traque/react';
+
+function MyComponent() {
+  const { captureException } = useTraque();
+
+  const handleAsyncOperation = async () => {
+    try {
+      await someApiCall();
+    } catch (error) {
+      captureException({
+        name: error.name,
+        message: error.message,
+        stack: error.stack,
+        // Additional context
+        tags: {
+          component: 'MyComponent',
+          operation: 'handleAsyncOperation',
+        },
+        extra: {
+          userId: 'user-123',
+          attemptNumber: 1,
+        },
+      });
+    }
+  };
+
+  return <button onClick={handleAsyncOperation}>Perform Action</button>;
+}
+```
+
+### Adding Context to Errors
+
+You can add additional context when capturing errors:
+
+```tsx
+import { useTraque } from '@traque/react';
+
+function MyComponent() {
+  const { captureException } = useTraque();
+
+  const handleError = (error) => {
+    captureException({
+      name: error.name,
+      message: error.message,
+      // HTTP context
+      httpContext: {
+        url: window.location.href,
+        method: 'POST',
+        statusCode: 500,
+      },
+      // User context
+      userContext: {
+        id: 'user-123',
+        email: 'user@example.com',
+        role: 'admin',
+      },
+      // Custom tags
+      tags: {
+        feature: 'payment',
+        version: '1.0.0',
+      },
+      // Additional data
+      context: {
+        orderId: '12345',
+        paymentMethod: 'credit_card',
+      },
+    });
+  };
+
+  return <div>{/* Your component content */}</div>;
+}
+```
+
+## Accessing the Traque Instance
+
+You can access the Traque instance directly using the `useTraque` hook:
+
+```tsx
+import { useTraque } from '@traque/react';
+
+function MyComponent() {
+  const { traque } = useTraque();
+
+  // Access Traque instance methods
+  traque.setUser({
+    id: 'user-123',
+    email: 'user@example.com',
+  });
+
+  return <div>{/* Your component content */}</div>;
+}
+```
+
+## Best Practices
+
+1. Place Error Boundaries strategically to isolate failures to specific components
+2. Add meaningful context when capturing errors manually
+3. Use appropriate error severity levels
+4. Include relevant user and system information
+5. Handle async errors appropriately

@@ -1,0 +1,129 @@
+---
+title: Installation
+description: Learn how to install and configure the Traque Node.js SDK for error tracking and monitoring.
+---
+
+# Node.js SDK Installation
+
+The Traque Node.js SDK allows you to monitor and track errors in your Node.js applications. This guide will help you get started with installing and configuring the SDK.
+
+## Installation
+
+You can install the Traque Node.js SDK using your preferred package manager:
+
+```package-install
+@traque/node
+```
+
+## Basic Configuration
+
+After installing the SDK, you need to initialize it in your application:
+
+```typescript
+import { Traque } from '@traque/node';
+
+// Initialize the SDK
+const traque = new Traque({
+  serviceUrl: 'YOUR_TRAQUE_SERVICE_URL',
+  apiKey: 'YOUR_API_KEY',
+  environment: 'PRODUCTION',
+});
+
+// Enable automatic error capturing
+traque.enableAutoCapture();
+```
+
+### Configuration Options
+
+The SDK accepts the following configuration options:
+
+```typescript
+interface Config {
+  serviceUrl: string; // Your Traque service URL
+  apiKey: string; // Your API key
+  environment: 'PRODUCTION' | 'STAGING' | 'DEVELOPMENT';
+  plugins?: Plugin[]; // Optional plugins
+}
+```
+
+## Error Capturing
+
+### Automatic Error Capturing
+
+The SDK can automatically capture unhandled exceptions and rejections:
+
+```typescript
+// Enable automatic capturing
+traque.enableAutoCapture();
+
+// Disable automatic capturing when needed
+traque.disableAutoCapture();
+```
+
+### Manual Error Capturing
+
+You can also capture errors manually with additional context:
+
+```typescript
+try {
+  // Your code here
+} catch (error) {
+  traque.captureException(error);
+}
+```
+
+## Framework Integration
+
+The SDK seamlessly integrates with popular Node.js web frameworks to capture HTTP context.
+
+### Express.js
+
+```typescript
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  traque.captureException(err, req, res);
+  next(err);
+});
+```
+
+### Fastify
+
+```typescript
+fastify.setErrorHandler((error, request, reply) => {
+  traque.captureException(error, request.raw, reply.raw);
+  throw error;
+});
+```
+
+### Hono
+
+```typescript
+app.onError((err, c) => {
+  traque.captureException(err, c.req.raw, c.res.raw);
+  return c.text('Internal Server Error', 500);
+});
+```
+
+When using framework integration, the SDK automatically captures:
+
+- Request URL
+- HTTP method
+- Status code
+- Status message
+- Client IP address
+
+## Best Practices
+
+1. Create a single Traque instance and reuse it throughout your application
+2. Enable automatic capturing in production environments
+3. Add HTTP context to your error reports when available
+4. Consider using plugins for additional functionality
+
+## Error Handling
+
+The SDK includes built-in error handling features:
+
+- Configuration validation during initialization
+- Graceful handling of network errors
+- Clear error messages for common issues
+- Support for both synchronous and asynchronous error capturing
+- Automatic HTTP context capture when available

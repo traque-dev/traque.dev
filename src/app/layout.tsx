@@ -23,7 +23,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className={`${manrope.className} antialiased`}>
+      <body className={`${manrope.className} overscroll-none antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>

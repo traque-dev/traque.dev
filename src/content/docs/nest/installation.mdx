@@ -1,0 +1,74 @@
+---
+title: Installation
+description: Learn how to install and configure Traque on NestJS
+---
+
+## Installation
+
+Install Traque using your preferred package manager:
+
+```package-install
+@traque/nest
+```
+
+## Setup
+
+To integrate Traque with your NestJS application, you'll need to initialize it in your main application file (`main.ts`). Here's how to set it up:
+
+```typescript
+import { Traque } from '@traque/nest';
+import { NestFactory } from '@nestjs/core';
+import { Logger } from '@nestjs/common';
+
+import { AppModule } from './App.module';
+
+const app = await NestFactory.create(AppModule);
+
+const traque = new Traque({
+  serviceUrl: process.env.TRAQUE_SERVICE_URL,
+  apiKey: process.env.TRAQUE_PUBLIC_API_KEY,
+  logger: new Logger('Traque'),
+});
+
+traque.setupNestExceptionFilter(app);
+```
+
+## Configuration
+
+The Traque constructor accepts the following configuration options:
+
+```typescript
+{
+  // The URL of your Traque service
+  serviceUrl: string;
+
+  // Your public API key from Traque Dashboard
+  apiKey: string;
+
+  // Optional: NestJS Logger instance for Traque
+  logger?: Logger;
+}
+```
+
+## Environment Variables
+
+Configure your environment variables in your `.env` file:
+
+```bash
+TRAQUE_SERVICE_URL=https://your-traque-service-url
+TRAQUE_PUBLIC_API_KEY=your_public_api_key_here
+```
+
+## Exception Handling
+
+Traque automatically sets up an exception filter for your NestJS application when you call `setupNestExceptionFilter()`. This allows Traque to track and monitor any exceptions that occur in your application.
+
+## Next Steps
+
+After installing and configuring Traque, you can:
+
+1. Monitor application exceptions and errors
+2. View error analytics in your Traque Dashboard
+3. Configure custom error tracking and monitoring
+
+For more detailed information about advanced features and configurations, please refer to our other documentation sections.

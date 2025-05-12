@@ -1,0 +1,61 @@
+---
+title: Installation
+description: Learn how to install and set up the Traque React SDK in your application
+---
+
+# Installation
+
+You can install the Traque React SDK using your preferred package manager:
+
+```package-install
+@traque/react
+```
+
+## Requirements
+
+- React 16.8+ (for Hooks support)
+- @traque/core package (installed automatically as a dependency)
+
+## Initial Setup
+
+After installing the package, you'll need to initialize the Traque client and wrap your application with the `TraqueProvider`. Here's a basic setup:
+
+```tsx
+import { Traque } from '@traque/core';
+import { TraqueProvider } from '@traque/react';
+
+// Initialize the Traque client
+const traque = new Traque({
+  serviceUrl: 'https://your-service-url.com',
+  apiKey: 'your-api-key',
+  environment: 'PRODUCTION',
+});
+
+function App() {
+  return (
+    <TraqueProvider traque={traque}>
+      <YourApp />
+    </TraqueProvider>
+  );
+}
+```
+
+### Configuration Options
+
+When initializing the Traque client, you can provide several configuration options:
+
+| Option        | Type    | Description                                              | Required |
+| ------------- | ------- | -------------------------------------------------------- | -------- |
+| `serviceUrl`  | string  | The URL of your Traque service endpoint                  | Yes      |
+| `apiKey`      | string  | Your Traque API key                                      | Yes      |
+| `environment` | string  | The environment name (e.g., 'PRODUCTION', 'DEVELOPMENT') | No       |
+| `release`     | string  | The release version of your application                  | No       |
+| `debug`       | boolean | Enable debug mode for additional logging                 | No       |
+
+## Next Steps
+
+Once you have installed and set up the Traque React SDK, you can:
+
+1. Set up [Error Boundaries](/react/basic-usage#error-boundaries) to catch and report React component errors
+2. Use the [useTraque hook](/react/basic-usage#manual-error-reporting) for manual error reporting
+3. Configure additional error tracking features
