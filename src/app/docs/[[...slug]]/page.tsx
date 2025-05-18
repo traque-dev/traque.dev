@@ -5,7 +5,7 @@ import {
   DocsTitle,
   DocsDescription,
 } from 'fumadocs-ui/page';
-import { notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 // import { metadataImage } from '@/lib/metadata';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
@@ -14,9 +14,13 @@ import { PlatformSelect } from '@/common/components/platform-select';
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
 }) {
-  const params = await props.params;
-  const page = source.getPage(params.slug);
-  if (!page) notFound();
+  const { slug } = await props.params;
+
+  const page = source.getPage(slug);
+
+  if (!page) {
+    return redirect('/docs/introduction');
+  }
 
   const MDX = page.data.body;
 
