@@ -3,7 +3,9 @@
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
 
-@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/typography" {
+  className: traque-prose;
+}
 
 @source '../../node_modules/fumadocs-ui/dist/**/*.js';
 

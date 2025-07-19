@@ -1,6 +1,5 @@
 import ReactMarkdown from 'react-markdown';
 import { Metadata } from 'next';
-import { Footer } from '@/common/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Traque',
@@ -153,11 +152,10 @@ export default function PrivacyPage() {
   return (
     <div>
       <div className="container mx-auto max-w-4xl px-4 py-12">
-        <div className="prose prose-gray dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-gray-100 max-w-none">
+        <div className="prose prose-gray dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-gray-100 max-w-none pt-16">
           <ReactMarkdown>{privacyPolicyContent}</ReactMarkdown>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

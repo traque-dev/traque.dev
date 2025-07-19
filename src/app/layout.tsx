@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from 'next';
-import { Manrope } from 'next/font/google';
+import { Geist } from 'next/font/google';
 import { Providers } from '@/app/providers';
 import type { PropsWithChildren } from 'react';
 import './globals.css';
 
-const manrope = Manrope({
+const geist = Geist({
   subsets: ['latin'],
 });
 
@@ -23,7 +23,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className={`${manrope.className} overscroll-none antialiased`}>
+      <body className={`${geist.className} antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>
