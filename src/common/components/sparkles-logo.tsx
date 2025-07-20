@@ -10,7 +10,7 @@ export function SparklesLogo() {
           Used by amazing startups
         </div>
 
-        <div className="mt-14 flex flex-row items-center justify-center gap-20">
+        <div className="mt-14 flex flex-col items-center justify-center gap-20 md:flex-row">
           <SpeeklLogo className="h-auto w-[150px]" />
           <BrymeeLogo className="h-auto w-[150px]" />
         </div>

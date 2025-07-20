@@ -1,4 +1,3 @@
-import { getWaitlistCount } from '@/common/api/waitlist';
 import { FeaturesGrid } from '@/common/components/FeaturesGrid';
 import { ClockCircleLinearIcon } from '@/common/ui/icons/ClockCircleLinearIcon';
 import { WadOfMoneyLinearIcon } from '@/common/ui/icons/WadOfMoneyLinearIcon';
@@ -7,19 +6,14 @@ import { CodeLinearIcon } from '@/common/ui/icons/CodeLinearIcon';
 import { LockKeyholeMinimalisticLinearIcon } from '@/common/ui/icons/LockKeyholeMinimalisticLinearIcon';
 import { BackgroundDots } from '@/common/ui/BackgroundDots';
 import { Hero } from '@/common/components/Hero';
-// import { Faq } from '@/common/components/faq';
 import { Features2 } from '@/common/components/features2';
-// import { LogoCloud } from '@/common/components/logos-cloud';
 import { SparklesLogo } from '@/common/components/sparkles-logo';
-
-export const revalidate = 60;
+import { FeaturesWithStickyScroll } from '@/common/components/features-with-sticky-scroll';
 
 export default async function Home() {
-  const { count } = await getWaitlistCount();
-
   return (
     <div>
-      <Hero count={count} />
+      <Hero />
 
       <SparklesLogo />
 
@@ -73,6 +67,8 @@ export default async function Home() {
           ]}
         />
       </div>
+
+      <FeaturesWithStickyScroll />
 
       <Features2 />
 

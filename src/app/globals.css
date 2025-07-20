@@ -34,3 +34,43 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+.code-border-anim {
+  position: absolute;
+  z-index: -10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  border-radius: 1rem;
+  overflow: hidden;
+  pointer-events: none;
+}
+.code-border-anim::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 10rem;
+  background: linear-gradient(
+    0deg,
+    hsla(0,0%,100%,0) 0%,
+    #8842C0 30%,
+    #ec4899 50%,
+    #8842C0 70%,
+    hsla(0,0%,40%,0) 100%
+  );
+  transform: translate(-50%, -50%) rotate(0deg);
+  transform-origin: left;
+  animation: border-rotate 8s linear infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@keyframes border-rotate {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
