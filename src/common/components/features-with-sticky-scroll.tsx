@@ -17,11 +17,11 @@ const features = [
     icon: <LayoutGrid className="h-8 w-8" />,
     title: "Keeps your team's projects organized",
     description:
-      'Organize all your projects in one place. Keep track of tasks, deadlines, and team progress. Never lose sight of what needs to be done.',
+      'Traque centralizes monitoring for all your applications in one dashboard. Keep track of system health and error rates across every project you manage.',
     content: (
       <div>
         <Image
-          src="/mobile_app_project.png"
+          src="/mobile_app_organization.png"
           alt="Project organization dashboard"
           height="400"
           width="400"
@@ -37,7 +37,7 @@ const features = [
       'Monitor all issues as they happen. Get instant alerts on your phone. Stay connected to your projects even when you are away from your desk.',
     content: (
       <Image
-        src="/mobile_app_organization.png"
+        src="/mobile_app_project.png"
         alt="Mobile issue tracking"
         height="400"
         width="400"
@@ -205,6 +205,7 @@ export const ScrollContent = ({
         className="h-full w-full self-start rounded-md"
       >
         {item.content && item.content}
+        <div className="absolute inset-x-0 bottom-0 z-10 h-[20%] bg-gradient-to-t from-black to-transparent" />
       </motion.div>
     </motion.div>
   );
