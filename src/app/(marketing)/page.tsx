@@ -9,6 +9,7 @@ import { Hero } from '@/common/components/Hero';
 import { Features2 } from '@/common/components/features2';
 import { SparklesLogo } from '@/common/components/sparkles-logo';
 import { FeaturesWithStickyScroll } from '@/common/components/features-with-sticky-scroll';
+import { BentoGridFeatures } from '@/common/components/bento-grid-features';
 
 export default async function Home() {
   return (
@@ -71,6 +72,8 @@ export default async function Home() {
       <FeaturesWithStickyScroll />
 
       <Features2 />
+
+      <BentoGridFeatures />
 
       {/* <Faq /> */}
     </div>

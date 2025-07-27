@@ -1,0 +1,127 @@
+---
+title: Event Tracking
+description: Learn how event tracking works in Traque
+---
+
+# Event Tracking
+
+Event tracking lets you monitor what users do in your app. Unlike error tracking that only captures problems, event tracking shows you all the good stuff - user interactions, feature usage, custom milestones, and more.
+
+## What Are Events?
+
+Events are actions or moments that happen in your app. Each event has two parts:
+
+1. **Name** - A simple string that describes what happened
+2. **Properties** - Any additional data you want to include (as an object)
+
+Examples of events you might track:
+
+- User login
+- Button clicks
+- Page views
+- Purchase completed
+- Feature used
+- Custom business events
+
+## How to Track Events
+
+Use the `captureEvent` method to track events in your app:
+
+```typescript
+traque.captureEvent('event_name', {
+  field: 'value',
+});
+```
+
+### Real Examples
+
+Here are some practical examples:
+
+```typescript
+// Track user login
+traque.captureEvent('user_login', {
+  userId: 'user123',
+  method: 'email',
+});
+
+// Track button click
+traque.captureEvent('button_click', {
+  buttonName: 'subscribe',
+  page: 'pricing',
+});
+
+// Track purchase
+traque.captureEvent('purchase_completed', {
+  amount: 29.99,
+  plan: 'pro',
+  currency: 'USD',
+});
+
+// Track feature usage
+traque.captureEvent('feature_used', {
+  feature: 'export_data',
+  fileType: 'csv',
+});
+```
+
+## Event Properties
+
+You can include any data in the properties object:
+
+- **Strings** - user IDs, page names, categories
+- **Numbers** - amounts, counts, scores
+- **Booleans** - flags, success/failure states
+- **Objects** - nested data structures
+- **Arrays** - lists of items
+
+```typescript
+traque.captureEvent('complex_event', {
+  userId: 'user123',
+  count: 42,
+  success: true,
+  metadata: {
+    source: 'mobile_app',
+    version: '2.1.0',
+  },
+  tags: ['premium', 'beta'],
+});
+```
+
+## Event Notifications
+
+Just like with errors, you can get notified when specific events happen. Depending on your notification trigger settings, you can receive:
+
+- **Push notifications** on your phone
+- **Email alerts** sent to your inbox
+- **Discord messages** in your team channel
+
+You can set up custom triggers based on:
+
+- Specific event names
+- Property values
+- Event frequency
+- User segments
+
+For example, you might want to get notified when:
+
+- A user upgrades to premium
+- Someone uses a new feature
+- Daily active users hit a milestone
+
+## Event Analytics
+
+All your events show up in Traque's analytics dashboard where you can:
+
+- See event trends over time
+- Filter by properties
+- Create custom charts
+- Track user journeys
+- Measure feature adoption
+
+## Next Steps
+
+Ready to start tracking events? Check out the platform-specific guides:
+
+- [React Event Tracking](/docs/react)
+- [Node.js Event Tracking](/docs/node)
+- [Nest.js Event Tracking](/docs/nest)

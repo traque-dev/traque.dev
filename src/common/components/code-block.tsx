@@ -1,48 +1,131 @@
-export async function CodeBlock() {
+'use client';
+import { useEffect, useState } from 'react';
+import { codeToHtml } from 'shiki';
+
+import { Check as CheckIcon, Copy as CopyIcon } from 'lucide-react';
+
+type CodeBlockProps = {
+  language: string;
+  filename: string;
+  highlightLines?: number[];
+} & (
+  | {
+      code: string;
+      tabs?: never;
+    }
+  | {
+      code?: never;
+      tabs: Array<{
+        name: string;
+        code: string;
+        language?: string;
+        highlightLines?: number[];
+      }>;
+    }
+);
+
+export const CodeBlock = ({
+  language,
+  filename,
+  code,
+  highlightLines = [],
+  tabs = [],
+}: CodeBlockProps) => {
+  const [copied, setCopied] = useState(false);
+  const [activeTab, setActiveTab] = useState(0);
+  const [highlightedCode, setHighlightedCode] = useState<string>('');
+
+  const tabsExist = tabs.length > 0;
+
+  const copyToClipboard = async () => {
+    const textToCopy = tabsExist ? tabs[activeTab].code : code;
+    if (textToCopy) {
+      await navigator.clipboard.writeText(textToCopy);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  const activeCode = tabsExist ? tabs[activeTab].code : code;
+  const activeLanguage = tabsExist
+    ? tabs[activeTab].language || language
+    : language;
+  const activeHighlightLines = tabsExist
+    ? tabs[activeTab].highlightLines || []
+    : highlightLines;
+
+  useEffect(() => {
+    const highlightCode = async () => {
+      if (!activeCode) return;
+
+      try {
+        const html = await codeToHtml(activeCode, {
+          lang: activeLanguage,
+          theme: 'vesper',
+          transformers: [
+            {
+              code(node) {
+                node.properties.style =
+                  'background: transparent; padding: 0; margin: 0;';
+              },
+              //   line(node, line) {
+              //     if (activeHighlightLines.includes(line)) {
+              //       node.properties.style =
+              //         'background-color: rgba(255,255,255,0.1); display: block; width: 100%;';
+              //     } else {
+              //       node.properties.style = 'display: block; width: 100%;';
+              //     }
+              //   },
+            },
+          ],
+        });
+        setHighlightedCode(html);
+      } catch (error) {
+        console.error('Error highlighting code:', error);
+        // Fallback to plain text
+        setHighlightedCode(`<pre><code>${activeCode}</code></pre>`);
+      }
+    };
+
+    highlightCode();
+  }, [activeCode, activeLanguage, activeHighlightLines]);
+
   return (
-    <>
-      <div className="relative w-full rounded-xl p-0.5">
-        <div className="code-border-anim" />
-        <div className="rounded-xl bg-[radial-gradient(at_88%_40%,#0a0a0f_0,transparent_85%),radial-gradient(at_49%_30%,#0a0a0f_0,transparent_85%),radial-gradient(at_14%_26%,#0a0a0f_0,transparent_85%),radial-gradient(at_0%_64%,#1e293b_0,transparent_85%),radial-gradient(at_41%_94%,#8842C0_0,transparent_85%),radial-gradient(at_100%_99%,#ec4899_0,transparent_85%)] p-6 shadow-[0px_-16px_24px_0px_rgba(255,255,255,0.25)_inset]">
-          <div className="flex items-center justify-between pb-4">
-            <span className="text-base font-semibold text-white">app.ts</span>
-            {/* <button className="rounded-full bg-[#8842C0] px-3 py-1.5 text-xs font-medium text-[#0a0a0f] transition hover:bg-[#ec4899] hover:text-white">
-              Copy
-            </button> */}
+    <div className="relative w-full rounded-lg bg-neutral-900 p-4 font-mono text-sm">
+      <div className="flex flex-col gap-2">
+        {tabsExist && (
+          <div className="flex overflow-x-auto">
+            {tabs.map((tab, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveTab(index)}
+                className={`px-3 !py-2 font-sans text-xs transition-colors ${
+                  activeTab === index
+                    ? 'text-white'
+                    : 'text-zinc-400 hover:text-zinc-200'
+                }`}
+              >
+                {tab.name}
+              </button>
+            ))}
           </div>
-          <pre className="m-0 overflow-x-auto rounded-lg bg-transparent p-0 text-sm leading-relaxed whitespace-pre text-blue-100">
-            <code>
-              <span className="text-[#8842C0]">import</span>{' '}
-              <span className="text-[#e0e0e0]">{'{'}</span> Traque{' '}
-              <span className="text-[#e0e0e0]">{'}'}</span>{' '}
-              <span className="text-[#8842C0]">from</span>{' '}
-              <span className="text-[#ec4899]">&apos;@traque/core&apos;</span>;
-              <br />
-              <br />
-              <span className="text-[#8842C0]">const</span>{' '}
-              <span className="text-[#ffd60a]">traque</span> ={' '}
-              <span className="text-[#8842C0]">new</span>{' '}
-              <span className="text-[#ffd60a]">Traque</span>(
-              <span className="text-[#e0e0e0]">{'{'}</span>
-              <br />
-              &nbsp;&nbsp;<span className="text-[#ec4899]">apiKey</span>:
-              process.env.<span className="text-[#ffd60a]">TRAQUE_API_KEY</span>
-              ,<br />
-              &nbsp;&nbsp;<span className="text-[#ec4899]">serviceUrl</span>:
-              process.env.
-              <span className="text-[#ffd60a]">TRAQUE_SERVICE_URL</span>,<br />
-              <span className="text-[#e0e0e0]">{'}'}</span>);
-              <br />
-              <br />
-              traque.<span className="text-[#ffd60a]">captureException</span>(
-              <span className="text-[#8842C0]">new</span>{' '}
-              <span className="text-[#ffd60a]">Error</span>(
-              <span className="text-[#ec4899]">&apos;Hello, Traque!&apos;</span>
-              ));
-            </code>
-          </pre>
-        </div>
+        )}
+        {!tabsExist && filename && (
+          <div className="flex items-center justify-between py-2">
+            <div className="text-xs text-zinc-400">{filename}</div>
+            <button
+              onClick={copyToClipboard}
+              className="flex items-center gap-1 font-sans text-xs text-zinc-400 transition-colors hover:text-zinc-200"
+            >
+              {copied ? <CheckIcon size={14} /> : <CopyIcon size={14} />}
+            </button>
+          </div>
+        )}
       </div>
-    </>
+      <div
+        className="shiki-container [&_code]:!bg-transparent [&_code]:text-sm [&_pre]:!m-0 [&_pre]:!bg-transparent [&_pre]:!p-0"
+        dangerouslySetInnerHTML={{ __html: highlightedCode }}
+      />
+    </div>
   );
-}
+};

@@ -13,14 +13,16 @@ Welcome to Traque! This guide will help you get started with installing and conf
 
 After selecting your platform above, you'll see the specific installation instructions for your environment. Follow these steps to get Traque up and running in your project.
 
+The core package `@traque/core` contains all the main features and works across all platforms - it's completely platform agnostic.
+
 ## Quick Start
 
 Once you've installed Traque, here are some common tasks to get you started:
 
 1. **Initialize Traque**
 
-   - Configure your project settings
-   - Set up your first tracking event
+   - Import and configure the Traque client
+   - Set up your API key and service URL
 
 2. **Basic Usage**
 
@@ -38,6 +40,49 @@ Traque is highly configurable and can be customized to meet your specific needs.
 - Set up your environment variables
 - Configure your tracking preferences
 - Initialize the client
+
+### Initialize Traque
+
+Here's how to set up Traque in your project:
+
+```typescript
+import { Traque } from '@traque/core';
+
+const traque = new Traque({
+  apiKey: process.env.TRAQUE_API_KEY,
+  serviceUrl: process.env.TRAQUE_SERVICE_URL,
+});
+```
+
+**Environment Variables:**
+
+Make sure to set up these environment variables in your project:
+
+- `TRAQUE_API_KEY` - Your unique API key from the Traque dashboard
+- `TRAQUE_SERVICE_URL` - The service URL for your Traque instance
+
+**Cloud Version:**
+
+If you want to use our cloud version, set your service URL to:
+
+```dotenv
+TRAQUE_SERVICE_URL=https://api.traque.dev
+```
+
+Note: Our cloud service and data storage is currently located in the US. We'll soon be adding EU servers and storage for better performance and data compliance in Europe.
+
+Once initialized, you can start tracking errors and events right away!
+
+## Mobile App
+
+The Traque mobile app is only available when using our cloud version. If you're running your own instance, you'll need to use the web dashboard for monitoring and notifications.
+
+With the mobile app, you can:
+
+- Get real-time notifications for errors and events
+- Monitor your app's health on the go
+- View detailed analytics and insights
+- Collaborate with your team from anywhere
 
 ## Need Help?
 

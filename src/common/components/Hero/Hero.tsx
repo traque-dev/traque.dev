@@ -3,7 +3,7 @@ import { BackgroundDots } from '@/common/ui/BackgroundDots';
 // import Image from 'next/image';
 import { type FC } from 'react';
 import { ScriptCopyButton } from '../script-copy-button';
-import { CodeBlock } from '../code-block';
+import { HeroCodeBlock } from '../hero-code-block';
 
 type Props = {
   count?: number;
@@ -25,12 +25,12 @@ export const Hero: FC<Props> = () => {
               </div>
             </div> */}
             <h1 className="bg-opacity-50 mt-10 bg-gradient-to-b from-neutral-50 to-neutral-400 bg-clip-text text-left text-4xl font-bold text-transparent md:text-5xl">
-              Error Tracking Service
+              Tracking Service
               <br /> for Your Startup
             </h1>
             <p className="mt-4 max-w-lg text-left text-base font-normal text-neutral-300">
-              Simple and effective error tracking service with a very convenient
-              mobile app.
+              Simple and effective error and event tracking service with a very
+              convenient mobile app.
             </p>
 
             <div className="mt-10">
@@ -50,7 +50,7 @@ export const Hero: FC<Props> = () => {
           </div>
 
           <div className="w-full md:flex-[0.5]">
-            <CodeBlock />
+            <HeroCodeBlock />
           </div>
         </div>
       </div>

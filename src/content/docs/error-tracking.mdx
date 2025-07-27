@@ -1,0 +1,82 @@
+---
+title: Error Tracking
+description: Learn how error tracking works in Traque
+---
+
+# Error Tracking
+
+Error tracking is one of Traque's main features. It helps you catch and fix problems in your app before they affect your users. When something goes wrong, Traque automatically captures the error and sends you all the details you need to understand what happened.
+
+## What Gets Tracked
+
+Traque automatically catches different types of errors:
+
+- **Runtime errors** - When your code crashes or throws an exception
+- **Network errors** - When API calls fail or timeout
+- **Validation errors** - When data doesn't match what you expect
+- **Custom errors** - Errors you manually report to Traque
+
+## How to Track Errors Manually
+
+While Traque automatically catches most errors, you can also manually track specific errors using the `captureException` method:
+
+```typescript
+traque.captureException(new Error('Hello, Traque!'));
+```
+
+The method accepts either:
+
+- **Standard JS/TS Error** - Regular JavaScript/TypeScript Error objects
+- **Internal Exception type** - Traque's custom exception format
+
+### Examples
+
+```typescript
+// Track a standard JavaScript error
+traque.captureException(new Error('Something went wrong'));
+
+// Track errors in try-catch blocks
+try {
+  // Some risky operation
+  riskyFunction();
+} catch (error) {
+  traque.captureException(error);
+}
+
+// Track custom errors with context
+const customError = new Error('User validation failed');
+traque.captureException(customError);
+```
+
+## Error Information
+
+For each error, Traque collects useful info:
+
+- **Error message** - What went wrong
+- **Stack trace** - Where the error happened in your code
+- **Context** - What the user was doing when it happened
+- **Environment** - Browser, device, OS details
+- **User info** - Who experienced the error (if available)
+- **Custom data** - Any extra info you want to include
+
+## Error Notifications
+
+Depending on your notification settings, you can get alerts when errors happen:
+
+- **Push notifications** on your phone
+- **Email alerts** sent to your inbox
+- **Discord messages** in your team channel
+
+You can set up different rules for different types of errors. For example, you might want instant notifications for critical errors but daily summaries for minor ones.
+
+## Error Grouping
+
+Traque groups similar errors together so you don't get overwhelmed with notifications. If the same error happens 100 times, you'll see it as one group with a count of 100 instead of 100 separate alerts.
+
+## Next Steps
+
+Ready to start tracking errors? Check out the platform-specific guides:
+
+- [React Error Tracking](/docs/react)
+- [Node.js Error Tracking](/docs/node)
+- [Nest.js Error Tracking](/docs/nest)

@@ -4,6 +4,9 @@
     "pages": [
       "introduction",
       "getting-started",
+      "error-tracking",
+      "event-tracking",
+      "mobile-app",
       "node",
       "nest",
       "react"

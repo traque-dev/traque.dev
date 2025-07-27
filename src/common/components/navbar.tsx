@@ -31,6 +31,10 @@ export const Navbar = () => {
       name: 'Docs',
       link: '/docs',
     },
+    // {
+    //   name: 'Pricing',
+    //   link: '/pricing',
+    // },
   ];
 
   const ref = useRef<HTMLDivElement>(null);
