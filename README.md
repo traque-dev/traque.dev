@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Traque Website
+
+The official website for **Traque** - a modern app monitoring and tracking tool that keeps developers connected to their applications wherever they are.
+
+## About Traque
+
+Traque is an innovative tracking solution that combines powerful error and event monitoring with mobile accessibility. Unlike traditional monitoring tools that chain you to your desk, Traque delivers real-time insights about your app's health and user behavior directly to your phone.
+
+### Key Features
+
+- **Real-time Error Tracking** - Monitor application errors as they happen
+- **Event Analytics** - Track user behavior and business events
+- **Mobile-First Monitoring** - Get notifications and check your app status on the go
+- **AWS WAF Integration** - Enhanced security with built-in traffic filtering
+- **Easy Setup** - Get started with just a few lines of code
+- **Multi-Platform Support** - Works with React, Node.js, NestJS, and more
+
+## This Repository
+
+This repository contains the source code for [traque.dev](https://traque.dev), including:
+
+- **Marketing Website** - Product information and pricing
+- **Documentation** - Comprehensive guides for getting started with Traque
+
+## Tech Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Styling**: Tailwind CSS
+- **Documentation**: Fumadocs
+- **UI Components**: Shadcn with Radix UI primitives
+- **Animations**: Motion (Framer Motion)
+- **Package Manager**: pnpm
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 22+
+- pnpm (recommended)
+
+### Installation
+
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-org/traque.dev.git
+cd traque.dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Start the development server:
 
-## Learn More
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Open [http://localhost:5001](http://localhost:5001) in your browser
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Available Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `pnpm dev` - Start development server on port 5001
+- `pnpm build` - Build the project for production
+- `pnpm start` - Start production server
+- `pnpm lint` - Run ESLint
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+├── app/                 # Next.js app directory
+│   ├── (marketing)/     # Marketing pages
+│   ├── (legal)/         # Legal pages (privacy, etc.)
+│   ├── docs/            # Documentation pages
+│   └── api/             # API routes
+├── common/              # Shared components and utilities
+│   ├── components/      # Reusable UI components
+│   ├── hooks/           # Custom React hooks
+│   └── utils/           # Utility functions
+├── content/             # MDX documentation content
+└── lib/                 # Library configurations
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contributing
+
+We welcome contributions to improve the Traque website! Please feel free to submit issues and pull requests.
+
+## License
+
+This project is proprietary software. All rights reserved.
+
+## Learn More About Traque
+
+- [Website](https://traque.dev)
+- [Documentation](https://traque.dev/docs)
+- [Pricing](https://traque.dev/pricing)
