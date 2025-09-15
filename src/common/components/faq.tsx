@@ -117,29 +117,54 @@ function FAQItem({ question, answer, index }: FAQItemProps) {
 export function Faq() {
   const faqs: Omit<FAQItemProps, 'index'>[] = [
     {
-      question: 'What is Traque and what does it do?',
+      question: 'Why was Traque built?',
       answer:
-        'Traque is a mobile app designed to help you track and manage your daily activities efficiently. Our intuitive interface and powerful features make it easy to stay organized and productive on the go.',
+        "Traque was created because existing tools lacked a great mobile experience for error tracking. As product builders, we want to know what's happening in our apps anywhere, especially when errors occur.",
     },
     {
-      question: 'What platforms is Traque available on?',
+      question: 'What does Traque track?',
       answer:
-        'Currently, Traque is available as a mobile app for both iOS and Android devices. You can download it from the App Store or Google Play Store to get started.',
+        'Traque tracks application errors and custom events in real time, then sends the right details to help you debug faster and understand user behavior.',
     },
     {
-      question: 'Is Traque free to use?',
+      question: 'Do I have to use the Traque cloud?',
       answer:
-        'Yes, Traque offers a free version with core tracking features. We also provide premium plans with advanced functionality for users who need more comprehensive tracking and analytics capabilities.',
+        'No. You can deploy your own Traque backend and use it with the web dashboard. The mobile app is available when using our cloud version.',
     },
     {
-      question: 'How do I get started with Traque?',
+      question: 'Is there a mobile app?',
       answer:
-        "Getting started is simple! Download the Traque app from your device's app store, create an account, and follow our guided onboarding process. You'll be tracking your activities in minutes.",
+        'Yes. Our iOS app is available now (Android is coming soon) and works with the Traque cloud to deliver real-time notifications and insights on the go.',
     },
     {
-      question: 'Is my data secure with Traque?',
+      question: 'How does Traque handle my data and privacy?',
       answer:
-        'Absolutely! We take data security seriously and use industry-standard encryption to protect your information. Your personal data is stored securely and we never share it with third parties without your consent.',
+        "We treat security seriously and don't sell your data. When you use AI features, we send minimized, de‑identified data to our model provider to generate answers.",
+    },
+    {
+      question: 'Which AI provider do you use?',
+      answer:
+        'We use OpenAI models by default for AI Chat and AI Agents features.',
+    },
+    {
+      question: 'Where is my data stored?',
+      answer:
+        'For the cloud version, data is currently stored in the US. EU regions are planned.',
+    },
+    {
+      question: 'How do notifications work?',
+      answer:
+        'You can receive push, email, and Discord notifications. Configure severity and frequency so you get alerted instantly for critical issues and summaries for the rest.',
+    },
+    {
+      question: 'Is there a free plan?',
+      answer:
+        'Yes. We offer a Free plan for getting started and a Plus plan for higher volumes and AI features.',
+    },
+    {
+      question: 'How do I get started?',
+      answer:
+        'Install @traque/core, set your API key and service URL, and start capturing errors and events in minutes.',
     },
   ];
 
@@ -149,18 +174,19 @@ export function Faq() {
       <div className="bg-primary/5 absolute top-20 -left-20 h-64 w-64 rounded-full blur-3xl" />
       <div className="bg-primary/5 absolute -right-20 bottom-20 h-64 w-64 rounded-full blur-3xl" />
 
-      <div className="relative container mx-auto max-w-6xl px-4">
+      <div className="relative mx-auto max-w-5xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mx-auto mb-12 max-w-2xl text-center"
+          className="mx-auto mb-12 max-w-3xl space-y-3 text-center"
         >
-          <h2 className="from-primary mb-3 bg-gradient-to-r to-rose-400 bg-clip-text text-3xl font-bold text-transparent">
+          <h2 className="text-center text-4xl font-semibold lg:text-5xl">
             Frequently Asked Questions
           </h2>
-          <p className="text-muted-foreground text-sm">
-            Everything you need to know about Traque
+          <p className="text-muted-foreground mx-auto max-w-2xl text-base">
+            Everything you need to know about{' '}
+            <span className="text-primary">Traque</span>
           </p>
         </motion.div>
 

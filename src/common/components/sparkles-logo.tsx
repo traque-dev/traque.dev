@@ -1,5 +1,5 @@
-import { BrymeeLogo } from './icons/BrymeeLogo';
-import { SpeeklLogo } from './icons/SpeeklLogo';
+import { BrymeeLogo } from './icons/brymee-logo';
+import { SpeeklLogo } from './icons/speekl-logo';
 import { SparklesCore } from './ui/sparkles';
 
 export function SparklesLogo() {

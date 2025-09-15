@@ -1,1 +1,0 @@
-export { WaitListForm } from './WaitListForm';

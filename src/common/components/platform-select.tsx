@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { ReactNode } from 'react';
-import { ReactLogo } from '@/common/ui/icons/ReactLogo';
-import { NodeJsLogo } from '@/common/ui/icons/NodeJsLogo';
-import { NestJsLogo } from '@/common/ui/icons/NestJsLogo';
+import { ReactLogo } from '@/common/components/icons/react-logo';
+import { NodeJsLogo } from '@/common/components/icons/nodejs-logo';
+import { NestJsLogo } from '@/common/components/icons/nestjs-logo';
 
 interface Platform {
   name: string;

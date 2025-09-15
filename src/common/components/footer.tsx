@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Logo } from './logo';
 import { Github as GithubIcon, Linkedin as LinkedinIcon } from 'lucide-react';
-import { XLogo } from './icons/XLogo';
+import { XLogo } from './icons/x-logo';
 
 export function Footer() {
   const pages = [

@@ -23,7 +23,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className={`${geist.className} antialiased`}>
+      <body className={`${geist.className} dark antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>

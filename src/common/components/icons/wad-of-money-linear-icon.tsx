@@ -1,4 +1,4 @@
-import { IconProps } from '@/common/ui/icons/types';
+import { IconProps } from '@/common/components/icons/types';
 
 export function WadOfMoneyLinearIcon({ className }: IconProps) {
   return (

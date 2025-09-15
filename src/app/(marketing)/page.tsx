@@ -1,15 +1,16 @@
-import { FeaturesGrid } from '@/common/components/FeaturesGrid';
-import { ClockCircleLinearIcon } from '@/common/ui/icons/ClockCircleLinearIcon';
-import { WadOfMoneyLinearIcon } from '@/common/ui/icons/WadOfMoneyLinearIcon';
-import { IPhoneLinearIcon } from '@/common/ui/icons/IPhoneLinearIcon';
-import { CodeLinearIcon } from '@/common/ui/icons/CodeLinearIcon';
-import { LockKeyholeMinimalisticLinearIcon } from '@/common/ui/icons/LockKeyholeMinimalisticLinearIcon';
-import { BackgroundDots } from '@/common/ui/BackgroundDots';
-import { Hero } from '@/common/components/Hero';
+import { FeaturesGrid } from '@/common/components/features-grid';
+import { ClockCircleLinearIcon } from '@/common/components/icons/clock-circle-linear-icon';
+import { WadOfMoneyLinearIcon } from '@/common/components/icons/wad-of-money-linear-icon';
+import { IPhoneLinearIcon } from '@/common/components/icons/iphone-linear-icon';
+import { CodeLinearIcon } from '@/common/components/icons/code-linear-icon';
+import { LockKeyholeMinimalisticLinearIcon } from '@/common/components/icons/lock-keyhole-minimalistic-linear-icon';
+import { BackgroundDots } from '@/common/components/ui/background-dots';
+import { Hero } from '@/common/components/hero';
 import { Features2 } from '@/common/components/features2';
 import { SparklesLogo } from '@/common/components/sparkles-logo';
 import { FeaturesWithStickyScroll } from '@/common/components/features-with-sticky-scroll';
 import { BentoGridFeatures } from '@/common/components/bento-grid-features';
+import { Faq } from '@/common/components/faq';
 
 export default async function Home() {
   return (
@@ -75,7 +76,7 @@ export default async function Home() {
 
       <BentoGridFeatures />
 
-      {/* <Faq /> */}
+      <Faq />
     </div>
   );
 }

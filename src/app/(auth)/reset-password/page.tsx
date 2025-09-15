@@ -9,7 +9,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Button } from '@/common/components/ui/button';
 import { auth } from '@/lib/auth';
 import { AnimatePresence, motion } from 'motion/react';
-import { ConfettiMinimalisticLinearIcon } from '@/common/ui/icons/ConfettiMinimalisticLinearIcon';
+import { ConfettiMinimalisticLinearIcon } from '@/common/components/icons/confetti-minimalistic-linear-icon';
 
 const schema = z
   .object({

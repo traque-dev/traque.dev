@@ -1,9 +1,10 @@
-import { Spotlight } from '@/common/ui/Spotlight';
-import { BackgroundDots } from '@/common/ui/BackgroundDots';
-// import Image from 'next/image';
+import { Spotlight } from '@/common/components/ui/spotlight';
+import { BackgroundDots } from '@/common/components/ui/background-dots';
 import { type FC } from 'react';
-import { ScriptCopyButton } from '../script-copy-button';
-import { HeroCodeBlock } from '../hero-code-block';
+import { ScriptCopyButton } from '@/common/components/script-copy-button';
+import { HeroCodeBlock } from '@/common/components/hero-code-block';
+import { Button } from './ui/button';
+import Link from 'next/link';
 
 type Props = {
   count?: number;
@@ -33,7 +34,10 @@ export const Hero: FC<Props> = () => {
               convenient mobile app.
             </p>
 
-            <div className="mt-10">
+            <div className="mt-6">
+              <Link href="https://app.traque.dev/auth/signup" target="_blank">
+                <Button className="mb-4">Get Started</Button>
+              </Link>
               <ScriptCopyButton
                 showMultiplePackageOptions={true}
                 codeLanguage="shell"

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { GridItem } from './GridItem';
+import { GridItem } from './grid-item';
 
 type Item = {
   area: string;

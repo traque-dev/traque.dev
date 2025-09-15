@@ -9,7 +9,7 @@ import {
 import { LayoutGrid, Smartphone, Bug } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from './ui/button';
-import { AppleLogo } from './icons/AppleLogo';
+import { AppleLogo } from './icons/apple-logo';
 import Link from 'next/link';
 
 const features = [

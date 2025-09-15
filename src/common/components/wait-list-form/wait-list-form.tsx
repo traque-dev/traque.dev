@@ -1,13 +1,13 @@
 'use client';
 
 import confetti from 'canvas-confetti';
-import { PlaceholdersAndVanishInput } from '@/common/ui/PlaceholdersAndVanishInput';
+import { PlaceholdersAndVanishInput } from '@/common/components/ui/placeholders-and-vanish-input';
 import { z } from 'zod';
 import { useController, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AnimatePresence, motion } from 'motion/react';
 import { useSaveToWaitlistMutation } from '@/common/hooks/api/waitlist';
-import { ConfettiMinimalisticLinearIcon } from '@/common/ui/icons/ConfettiMinimalisticLinearIcon';
+import { ConfettiMinimalisticLinearIcon } from '@/common/components/icons/confetti-minimalistic-linear-icon';
 
 const waitlistSchema = z.object({
   email: z

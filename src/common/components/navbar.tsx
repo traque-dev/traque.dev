@@ -17,6 +17,7 @@ interface NavbarProps {
   navItems: {
     name: string;
     link: string;
+    target?: string;
   }[];
   visible: boolean;
 }
@@ -31,10 +32,15 @@ export const Navbar = () => {
       name: 'Docs',
       link: '/docs',
     },
-    // {
-    //   name: 'Pricing',
-    //   link: '/pricing',
-    // },
+    {
+      name: 'Download',
+      link: 'https://apps.apple.com/us/app/traque-monitoring/id6743767766',
+      target: '_blank',
+    },
+    {
+      name: 'Pricing',
+      link: '/pricing',
+    },
   ];
 
   const ref = useRef<HTMLDivElement>(null);
@@ -115,6 +121,7 @@ const DesktopNav = ({ navItems, visible }: NavbarProps) => {
             <Link
               className="relative px-3 py-1.5 text-white/90 transition-colors hover:text-white"
               href={navItem.link}
+              target={navItem.target}
             >
               <span className="relative z-10">{navItem.name}</span>
               {hoveredIndex === idx && (
@@ -164,11 +171,8 @@ const DesktopNav = ({ navItems, visible }: NavbarProps) => {
               {/* <Button as={Link} href="/login" variant="secondary">
                 Login
               </Button> */}
-              <Link
-                href="https://apps.apple.com/us/app/traque-monitoring/id6743767766"
-                target="_blank"
-              >
-                <Button variant="default">Download App</Button>
+              <Link href="https://app.traque.dev/auth/signup" target="_blank">
+                <Button variant="default">Get Started</Button>
               </Link>
             </div>
           </motion.div>

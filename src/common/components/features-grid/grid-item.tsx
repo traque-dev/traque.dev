@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { GlowingEffect } from '@/common/ui/GlowingEffect';
+import { GlowingEffect } from '@/common/components/ui/glowing-effect';
 
 type GridItemProps = {
   area: string;
