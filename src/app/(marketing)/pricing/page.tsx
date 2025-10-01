@@ -6,7 +6,7 @@ import { Spotlight } from '@/common/components/ui/spotlight';
 
 export default function PricingPage() {
   return (
-    <div className="relative">
+    <div className="relative overflow-x-hidden">
       <Spotlight />
       <BackgroundDots />
 
